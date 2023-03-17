@@ -3,7 +3,7 @@ Swift Assessment Test
 
 ## Building And Running The Project (Requirements)
 * Swift 5.0+
-* SwuftUI
+* SwiftUI
 * Xcode 14.2+
 * iOS 15.5+
 
