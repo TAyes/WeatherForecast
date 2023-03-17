@@ -12,35 +12,35 @@ struct DetailsCurrentWeatherView: View {
     let data: CurrentWeather
     
     var sunrise: String {
-        return data.sys.sunrise.dateFromMilliseconds().hourMinute()
+        return data.sys?.sunrise?.dateFromMilliseconds().hourMinute() ?? ""
     }
 
     var sunset: String {
-        return data.sys.sunset.dateFromMilliseconds().hourMinute()
+        return data.sys?.sunset?.dateFromMilliseconds().hourMinute() ?? ""
     }
     
     var temperatureMax: String {
-        return "\(Int(data.mainValue.tempMax))°"
+        return "\(Int(data.mainValue?.tempMax ?? 0))°"
     }
 
     var temperatureMin: String {
-        return "\(Int(data.mainValue.tempMin))°"
+        return "\(Int(data.mainValue?.tempMin ?? 0))°"
     }
 
     var visibility: String {
-        return "\(Float(data.visibility/1000)) Km"
+        return "\(Float((data.visibility ?? 0)/1000)) Km"
     }
 
     var feelsLike: String {
-        return "\(data.mainValue.feelsLike)°"
+        return "\(data.mainValue?.feelsLike ?? 0.0)°"
     }
     
     var pressure: String {
-        return "\(data.mainValue.pressure) hPa"
+        return "\(data.mainValue?.pressure ?? 0) hPa"
     }
 
     var humidity: String {
-        return "\(data.mainValue.humidity)%"
+        return "\(data.mainValue?.humidity ?? 0)%"
     }
 
     var body: some View {

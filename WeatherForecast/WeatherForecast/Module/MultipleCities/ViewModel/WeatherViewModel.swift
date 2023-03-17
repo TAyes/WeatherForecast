@@ -25,7 +25,7 @@ protocol WeatherViewModelType: ViewModelType {
     func fetchWeatherByCityName()
 }
 
-class WeatherViewModel: NSObject, WeatherViewModelType {
+class WeatherViewModel: WeatherViewModelType {
 
     // MARK: - Properties
     @Published var showAlert = false
@@ -44,7 +44,7 @@ class WeatherViewModel: NSObject, WeatherViewModelType {
 
     private let locationManager = CLLocationManager()
     private var disposables = Set<AnyCancellable>()
-    private var loginFetcher: APISRequestFetchable
+    var loginFetcher: APISRequestFetchable
     
     private var locationDataManager: LocationDataManager
     
@@ -52,7 +52,6 @@ class WeatherViewModel: NSObject, WeatherViewModelType {
     init(loginFetcher: APISRequestFetchable, locationDataManager: LocationDataManager = LocationDataManager()) {
         self.loginFetcher = loginFetcher
         self.locationDataManager = locationDataManager
-        super.init()
         location()
     }
     
@@ -98,7 +97,7 @@ extension WeatherViewModel {
         guard let url = urlComps.url else {return}
         self.isLoading = true
        
-       loginFetcher.fetchSearchResult(fromURL: url, httpBody: nil, httpMethod: .get).receive(on: DispatchQueue.main)
+       loginFetcher.fetchSearchResult(fromURL: url).receive(on: DispatchQueue.main)
                    .sink { [weak self] value in
                        
                        switch value {

@@ -47,7 +47,7 @@ class CurrentCityViewModel: CurrentCityViewModelType {
     private let cityId = "1627459" // Serpong City Id
     
     private var disposables = Set<AnyCancellable>()
-    private let loginFetcher: APISRequestFetchable
+    let loginFetcher: APISRequestFetchable
     private var locationDataManager: LocationDataManager
     
     private enum SuffixURL: String {
@@ -112,7 +112,7 @@ extension CurrentCityViewModel {
         APIs.checkForAPIKey()
         guard let url = prepareURL(suffixURL: suffixURL, with: location) else {return }
        
-       loginFetcher.fetchCurrentWeather(fromURL: url, httpBody: nil, httpMethod: .get).receive(on: DispatchQueue.main)
+       loginFetcher.fetchCurrentWeather(fromURL: url).receive(on: DispatchQueue.main)
                    .sink { [weak self] value in
                        
                        switch value {
@@ -144,7 +144,7 @@ extension CurrentCityViewModel {
         APIs.checkForAPIKey()
         guard let url = prepareURL(suffixURL: suffixURL, with: location) else {return }
        
-       loginFetcher.fetchForecastWeather(fromURL: url, httpBody: nil, httpMethod: .get).receive(on: DispatchQueue.main)
+       loginFetcher.fetchForecastWeather(fromURL: url).receive(on: DispatchQueue.main)
                    .sink { [weak self] value in
                        
                        switch value {
@@ -159,7 +159,7 @@ extension CurrentCityViewModel {
                    } receiveValue: { [weak self] forecastWeatherResponse in
                        guard let ws = self else { return }
                        if let forecastWeatherResponse = forecastWeatherResponse {
-                           ws.hourlyWeathers = forecastWeatherResponse.list
+                           ws.hourlyWeathers = forecastWeatherResponse.list ?? []
                            ws.dailyWeathers = forecastWeatherResponse.dailyList
                            ws.stateForecastWeather = .success
                        } else {

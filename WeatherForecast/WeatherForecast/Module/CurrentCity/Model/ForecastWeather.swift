@@ -9,11 +9,11 @@
 import Foundation
 
 struct ForecastWeather: Codable {
-    var date: Int
-    var mainValue: ForecastWeatherMainValue
-    var elements: [WeatherElement]
-    let clouds: WeatherClouds
-    let wind: WeatherWind
+    var date: Int?
+    var mainValue: ForecastWeatherMainValue?
+    var elements: [WeatherElement]?
+    var clouds: WeatherClouds?
+    var wind: WeatherWind?
 
     enum CodingKeys: String, CodingKey {
         case clouds, wind

@@ -13,19 +13,19 @@ struct LocationAndTemperatureHeaderView: View {
 
     var weatherName: String {
         var result = ""
-        if let weather = data.elements.first {
-            result = weather.main
+        if let weather = data.elements?.first {
+            result = weather.main ?? ""
         }
         return result
     }
     
     var temperature: String {
-        return "\(Int(data.mainValue.temp))°"
+        return "\(Int(data.mainValue?.temp ?? 0))°"
     }
 
     var body: some View {
         VStack {
-            Text(data.name)
+            Text(data.name ?? "")
                 .font(.largeTitle)
                 .fontWeight(.medium)
             Text(weatherName)

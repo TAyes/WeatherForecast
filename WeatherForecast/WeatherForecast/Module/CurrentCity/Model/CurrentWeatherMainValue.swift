@@ -9,8 +9,8 @@
 import Foundation
 
 struct CurrentWeatherMainValue: Codable {
-    let temp, feelsLike, tempMin, tempMax: Double
-    let pressure, humidity: Int
+    var temp, feelsLike, tempMin, tempMax: Double?
+    var pressure, humidity: Int?
 
     enum CodingKeys: String, CodingKey {
         case temp

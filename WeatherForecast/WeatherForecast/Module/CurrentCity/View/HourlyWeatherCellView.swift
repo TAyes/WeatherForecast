@@ -12,17 +12,17 @@ struct HourlyWeatherCellView: View {
     var data: ForecastWeather
 
     var hour: String {
-        return data.date.dateFromMilliseconds().hour()
+        return data.date?.dateFromMilliseconds().hour() ?? ""
     }
 
     var temperature: String {
-        return "\(Int(data.mainValue.temp))°"
+        return "\(Int(data.mainValue?.temp ?? 0))°"
     }
 
     var icon: String {
         var image = "WeatherIcon"
-        if let weather = data.elements.first {
-            image = weather.icon
+        if let weather = data.elements?.first {
+            image = weather.icon ?? ""
         }
         return image
     }
@@ -30,7 +30,7 @@ struct HourlyWeatherCellView: View {
     var body: some View {
         VStack {
             Text(hour)
-            Text("\(data.mainValue.humidity)%")
+            Text("\(data.mainValue?.humidity ?? 0)%")
                 .font(.system(size: 12))
                 .foregroundColor(
                     .init(red: 127/255,

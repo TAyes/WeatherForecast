@@ -28,9 +28,6 @@ extension Fetchable {
           .mapError { error in
              APIError.network(message: error.localizedDescription)
           }
-//          .flatMap(maxPublishers: .max(1)) { pair in
-//            decode(pair.data)
-//          }
         
           .flatMap { data, response -> AnyPublisher<T, APIError> in
                    
@@ -44,8 +41,6 @@ extension Fetchable {
               if !(200..<300).contains(response.statusCode) {
                   return Fail(error: APIError.status(message: "\(response.description)", code: response.statusCode)).eraseToAnyPublisher()
               }
-              let fixedData = String(data: data, encoding: .utf8) ?? "";
-                         print(fixedData)
 
                        return Just(data)
                            .decode(type: T.self, decoder: jsonDecoder)

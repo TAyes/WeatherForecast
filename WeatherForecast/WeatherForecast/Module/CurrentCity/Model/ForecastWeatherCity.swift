@@ -9,11 +9,11 @@
 import Foundation
 
 struct ForecastWeatherCity: Codable {
-    let id: Int
-    let name: String
-    let coordinate: Coordinate
-    let country: String
-    let timezone, sunrise, sunset: Int
+    var id: Int?
+    var name: String?
+    var coordinate: Coordinate?
+    var country: String?
+    var timezone, sunrise, sunset: Int?
     
     enum CodingKeys: String, CodingKey {
         case id, name

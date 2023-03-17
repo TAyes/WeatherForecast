@@ -9,10 +9,10 @@
 import Foundation
 
 struct ForecastWeatherResponse: Codable {
-    let code: String
-    let message, count: Int
-    let list: [ForecastWeather]
-    let city: ForecastWeatherCity
+    var code: String?
+    var message, count: Int?
+    var list: [ForecastWeather]?
+    var city: ForecastWeatherCity?
     
     enum CodingKeys: String, CodingKey {
         case code = "cod"
@@ -33,16 +33,16 @@ struct ForecastWeatherResponse: Codable {
     
     var dailyList: [ForecastWeather] {
         var result: [ForecastWeather] = []
-        guard var before = list.first else {
+        guard var before = list?.first else {
             return result
         }
         
-        if before.date.dateFromMilliseconds().dayWord() != Date().dayWord() {
+        if before.date?.dateFromMilliseconds().dayWord() != Date().dayWord() {
             result.append(before)
         }
 
-        for weather in list {
-            if weather.date.dateFromMilliseconds().dayWord() != before.date.dateFromMilliseconds().dayWord() {
+        for weather in list ?? [] {
+            if weather.date?.dateFromMilliseconds().dayWord() != before.date?.dateFromMilliseconds().dayWord() {
                 result.append(weather)
             }
             before = weather

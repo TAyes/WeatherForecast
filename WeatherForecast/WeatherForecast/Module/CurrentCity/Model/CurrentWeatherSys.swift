@@ -9,9 +9,9 @@
 import Foundation
 
 struct CurrentWeatherSys: Codable {
-    let type, id: Int
-    let country: String
-    let sunrise, sunset: Int
+    var type, id: Int?
+    var country: String?
+    var sunrise, sunset: Int?
     
     static func emptyInit() -> CurrentWeatherSys {
         return CurrentWeatherSys(

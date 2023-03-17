@@ -12,20 +12,20 @@ struct DailyWeatherCellView: View {
     let data: ForecastWeather
     
     var day: String {
-        return data.date.dateFromMilliseconds().dayWord()
+        return data.date?.dateFromMilliseconds().dayWord() ?? ""
     }
     var temperatureMax: String {
-        return "\(Int(data.mainValue.tempMax))°"
+        return "\(Int(data.mainValue?.tempMax ?? 0))°"
     }
 
     var temperatureMin: String {
-        return "\(Int(data.mainValue.tempMin))°"
+        return "\(Int(data.mainValue?.tempMin ?? 0))°"
     }
     
     var icon: String {
         var image = "WeatherIcon"
-        if let weather = data.elements.first {
-            image = weather.icon
+        if let weather = data.elements?.first {
+            image = weather.icon ?? ""
         }
         return image
     }

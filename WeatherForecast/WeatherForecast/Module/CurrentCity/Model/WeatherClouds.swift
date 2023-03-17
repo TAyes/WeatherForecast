@@ -9,7 +9,7 @@
 import Foundation
 
 struct WeatherClouds: Codable {
-    let all: Int
+    var all: Int?
 
     static func emptyInit() -> WeatherClouds {
         return WeatherClouds(all: 0)
